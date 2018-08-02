@@ -1,0 +1,63 @@
+﻿@model PL.Models.PageViewModels.GenreListPageViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Podaci o zanrovima</h2>
+<hr />
+
+@if (Model.Success)
+{
+    using (Html.BeginForm("Index", "Genre", null, FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        <div class="col-md-12">
+            @Html.RouteLink("Kreiraj novi", new { action = "Create", controller = "Genre" }, new { @class = "btn btn-default col-md-2" })
+            <div class="col-md-4 col-md-offset-6">
+                <div class="input-group col-md-12">
+                    @Html.TextBox("genre", null, new { @class = "form-control", placeholder = "zanr" })
+                    <div class="input-group-btn">
+                        <button type="submit" class="btn btn-info">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Naziv zanra</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var genre in Model.GenreViewModels)
+                    {
+                        <tr>
+                            <td>@genre.Genre</td>
+                            <td>
+                                <a href="@Url.Action("Details", "Genre", new { id = genre.GenreId })" class="btn btn-primary-table btn-xs"><span class="glyphicon glyphicon-book"></span></a>
+                                <a href="@Url.Action("Edit", "Genre", new { id = genre.GenreId })" class="btn btn-primary-table btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a href="@Url.Action("Delete", "Genre", new { id = genre.GenreId })" class="btn btn-primary-table btn-xs" onclick="return confirm('Da li ste sigurni da zelite da obrisete dati zanr?')"><span class="glyphicon glyphicon-trash"></span></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        }
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert-danger">
+                <a href="#" class="close" data-dissmiss="alert" aria-label="close">&times;</a>
+                <strong>Greska!</strong> @Model.Message
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,44 @@
+﻿@model PL.Models.PageViewModels.GenreSinglePageViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Zanr detalji</h2>
+<hr />
+
+@if (Model.Success)
+{
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.GenreViewModel.GenreId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.GenreViewModel.GenreId)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.GenreViewModel.Genre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.GenreViewModel.Genre)
+            </dd>
+
+        </dl>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert-danger">
+                <a href="#" class="close" data-dissmiss="alert" aria-label="close">&times;</a>
+                <strong>Greska!</strong> @Model.Message
+            </div>
+        </div>
+    </div>
+}

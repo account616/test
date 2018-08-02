@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F1E7D6CA-6878-4E9A-A4E3-E44A7038C8AD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SL</RootNamespace>
+    <AssemblyName>SL</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Abstractions\IAuthorService.cs" />
+    <Compile Include="Abstractions\IBookService.cs" />
+    <Compile Include="Abstractions\IGenreService.cs" />
+    <Compile Include="Abstractions\ILanguageService.cs" />
+    <Compile Include="Abstractions\INationalityService.cs" />
+    <Compile Include="Implementations\AuthorService.cs" />
+    <Compile Include="Implementations\BookService.cs" />
+    <Compile Include="Implementations\GenreService.cs" />
+    <Compile Include="Implementations\LanguageService.cs" />
+    <Compile Include="Implementations\NationalityService.cs" />
+    <Compile Include="Mappings\AuthorMapper.cs" />
+    <Compile Include="Mappings\BookMapper.cs" />
+    <Compile Include="Mappings\GenreMapper.cs" />
+    <Compile Include="Mappings\LanguageMapper.cs" />
+    <Compile Include="Mappings\NationalityMapper.cs" />
+    <Compile Include="Messages\Books\CreateBookRequest.cs" />
+    <Compile Include="Messages\Books\CreateBookResponse.cs" />
+    <Compile Include="Messages\Books\DeleteBookRequest.cs" />
+    <Compile Include="Messages\Books\DeleteBookResponse.cs" />
+    <Compile Include="Messages\Books\FindAllBooksResponse.cs" />
+    <Compile Include="Messages\Books\UpdateBookRequest.cs" />
+    <Compile Include="Messages\Books\UpdateBookResponse.cs" />
+    <Compile Include="Messages\Authors\CreateAuthorRequest.cs" />
+    <Compile Include="Messages\Authors\CreateAuthorResponse.cs" />
+    <Compile Include="Messages\Authors\DeleteAuthorRequest.cs" />
+    <Compile Include="Messages\Authors\DeleteAuthorResponse.cs" />
+    <Compile Include="Messages\Authors\FindAllAuthorsResponse.cs" />
+    <Compile Include="Messages\Authors\UpdateAuthorRequest.cs" />
+    <Compile Include="Messages\Authors\UpdateAuthorResponse.cs" />
+    <Compile Include="Messages\Genres\CreateGenreRequest.cs" />
+    <Compile Include="Messages\Genres\CreateGenreResponse.cs" />
+    <Compile Include="Messages\Genres\DeleteGenreRequest.cs" />
+    <Compile Include="Messages\Genres\DeleteGenreResponse.cs" />
+    <Compile Include="Messages\Genres\FindAllGenresResponse.cs" />
+    <Compile Include="Messages\Genres\UpdateGenreRequest.cs" />
+    <Compile Include="Messages\Genres\UpdateGenreResponse.cs" />
+    <Compile Include="Messages\Nationalities\CreateNationalityRequest.cs" />
+    <Compile Include="Messages\Nationalities\CreateNationalityResponse.cs" />
+    <Compile Include="Messages\Nationalities\DeleteNationalityRequest.cs" />
+    <Compile Include="Messages\Nationalities\DeleteNationalityResponse.cs" />
+    <Compile Include="Messages\Nationalities\FindAllNationalitiesResponse.cs" />
+    <Compile Include="Messages\Nationalities\UpdateNationalityRequest.cs" />
+    <Compile Include="Messages\Nationalities\UpdateNationalityResponse.cs" />
+    <Compile Include="Messages\Languages\CreateLanguageRequest.cs" />
+    <Compile Include="Messages\Languages\CreateLanguageResponse.cs" />
+    <Compile Include="Messages\Languages\DeleteLanguageRequest.cs" />
+    <Compile Include="Messages\Languages\DeleteLanguageResponse.cs" />
+    <Compile Include="Messages\Languages\FindAllLanguagesResponse.cs" />
+    <Compile Include="Messages\Languages\UpdateLanguageRequest.cs" />
+    <Compile Include="Messages\Languages\UpdateLanguageResponse.cs" />
+    <Compile Include="Messages\ResponseBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{651b4478-c5a0-4d36-bdee-c11685825475}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

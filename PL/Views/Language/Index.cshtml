@@ -1,0 +1,46 @@
+﻿@model PL.Models.PageViewModels.LanguageListPageViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Podaci o jezicima</h2>
+<hr />
+
+@if (Model.Success)
+{
+    @Html.RouteLink("Kreiraj novi", new { action = "Create", controller = "Language" }, new { @class = "btn btn-default col-md-12" })
+    <table class="table table-bordered table-striped col-md-12">
+        <thead>
+            <tr>
+                <th class="col-md-10">Jezik</th>
+                <th class="col-md-2">Opcije</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var language in Model.LanguageViewModels)
+                {
+                <tr>
+                    <td>@language.Language</td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Language", new { id = language.LanguageId })" class="btn btn-primary-table btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a href="@Url.Action("Delete", "Language", new { id = language.LanguageId })" class="btn btn-primary-table btn-xs" onclick="return confirm('Da li ste sigurni da zelite da obrisete odabrani jezik?')"><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert-danger">
+                <a href="#" class="close" data-dissmiss="alert" aria-label="close">&times;</a>
+                <strong>Greska!</strong> @Model.Message
+            </div>
+        </div>
+    </div>
+}
+

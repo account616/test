@@ -1,0 +1,73 @@
+﻿@model PL.Models.PageViewModels.BookListPageViewModel
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.Page = "BookIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Knjige</h2>
+<hr />
+
+@if (Model.Success)
+{
+    using (Html.BeginForm("Index", "Book", null, FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        <div class="form-inline">
+            <label>Title:</label>
+            @Html.TextBox("titleSearchString", null, new { @class = "form-control", placeholder = "naslov" })
+            <label>ISBN:</label>
+            @Html.TextBox("isbnSearchString", null, new { @class = "form-control", placeholder = "isbn" })
+            <button type="submit" class="btn btn-default">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </div>
+
+        <div class="form-inline">
+                @Html.DropDownListFor(x => x.GenreFilterId, new SelectList(Model.GenreViewModels, "GenreId", "Genre"), new { @class = "form-control" })
+                @Html.DropDownListFor(x => x.LanguageFilterId, new SelectList(Model.LanguageViewModels, "LanguageId", "Language"), new { @class = "form-control" })
+                @Html.DropDownListFor(x => x.AuthorFilterId, new SelectList(Model.AuthorViewModels, "AuthorId", "Name"), new { @class = "form-control" })
+                <button type="submit" class="btn btn-info">Filter</button>
+        </div>
+    }
+    <hr />
+    @Html.RouteLink("Kreiraj novu", new { action = "Create", controller = "Book" }, new { @class = "btn btn-default col-md-12" })
+    <table class="table table-bordered table-striped col-md-12">
+        <thead>
+            <tr>
+                <th class="col-md-3">Naslov</th>
+                <th class="col-md-3">ISBN</th>
+                <th class="col-md-2">Zanr</th>
+                <th class="col-md-2">Jezik</th>
+                <th class="col-md-2">Opcije</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model.BookViewModels)
+                {
+                <tr>
+                    <td>@book.Title</td>
+                    <td>@book.ISBN</td>
+                    <td>@book.Genre.Genre</td>
+                    <td>@book.Language.Language</td>
+                    <td>
+                        <a href="@Url.Action("Details", "Book", new { id = book.BookId })" class="btn btn-primary-table btn-xs"><span class="glyphicon glyphicon-book"></span></a>
+                        <a href="@Url.Action("Edit", "Book", new { id = book.BookId })" class="btn btn-primary-table btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a href="@Url.Action("Delete", "Book", new { id = book.BookId })" class="btn btn-primary-table btn-xs" onclick="return confirm('Da li ste sigurni da zelite da obrisete odabranu knjigu?')"><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert-danger">
+                <a href="#" class="close" data-dissmiss="alert" aria-label="close">&times;</a>
+                <strong>Greska!</strong> @Model.Message
+            </div>
+        </div>
+    </div>
+}

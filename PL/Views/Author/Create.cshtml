@@ -1,0 +1,45 @@
+﻿@model PL.Models.PageViewModels.AuthorSinglePageViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Kreiranje Autora</h2>
+<hr />
+
+@if (Model.Success)
+{
+    using (Html.BeginForm("Create", "Author", null, FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        <div class="form-group">
+            <label class="control-label col-md-2">Ime:</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(x => x.AuthorViewModel.Name, new { @class = "form-control" })
+                @Html.ValidationMessage("AuthorViewModel.Name")
+            </div>
+            <label class="control-label col-md-2">Nacionalnost:</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(x => x.AuthorViewModel.Nationality.NationalityId, new SelectList(Model.NationalityViewModels, "NationalityId", "Nationality"), new { @class = "form-control" })
+                @Html.ValidationMessage("AuthorViewModel.Nationality")
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input class="btn btn-default" type="submit" value="Potvrdi" />
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert-danger">
+                <a href="#" class="close" data-dissmiss="alert" aria-label="close">&times;</a>
+                <strong>Greska!</strong> @Model.Message
+            </div>
+        </div>
+    </div>
+}
+

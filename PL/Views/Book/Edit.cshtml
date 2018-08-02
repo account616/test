@@ -1,0 +1,66 @@
+﻿@model PL.Models.PageViewModels.BookSinglePageViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Kreiranje knjige</h2>
+<hr />
+
+@if (Model.Success)
+{
+    using (Html.BeginForm("Edit", "Book", null, FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        <div class="form-group">
+            @Html.HiddenFor(x => x.BookViewModel.BookId)
+            <label class="control-label col-md-2">Naziv:</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(x => x.BookViewModel.Title, new { @class = "form-control" })
+                @Html.ValidationMessage("BookViewModel.Title")
+            </div>
+            <label class="control-label col-md-2">ISBN:</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(x => x.BookViewModel.ISBN, new { @class = "form-control" })
+                @Html.ValidationMessage("BookViewModel.ISBN")
+            </div>
+            <label class="control-label col-md-2">Opis:</label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(x => x.BookViewModel.Description, new { @class = "form-control" })
+                @Html.ValidationMessage("BookViewModel.Description")
+            </div>
+            <label class="control-label col-md-2">Zanr:</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(x => x.BookViewModel.Genre.GenreId, new SelectList(Model.GenreViewModels, "GenreId", "Genre", Model.BookViewModel.Genre), new { @class = "form-control" })
+                @Html.ValidationMessage("BookViewModel.GenreId")
+            </div>
+            <label class="control-label col-md-2">Jezik:</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(x => x.BookViewModel.Language.LanguageId, new SelectList(Model.LanguageViewModels, "LanguageId", "Language", Model.BookViewModel.Language), new { @class = "form-control" })
+                @Html.ValidationMessage("AuthorViewModel.LanguageId")
+            </div>
+            <label class="control-label col-md-2">Autori:</label>
+            <div class="col-md-10">
+                @Html.ListBoxFor(x => x.BookViewModel.AuthorIds, new MultiSelectList(Model.AuthorViewModels, "AuthorId", "Name", Model.BookViewModel.Authors), new { @class = "form-control" })
+                @Html.ValidationMessage("BookViewModel.AuthorIds")
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input class="btn btn-default" type="submit" value="Potvrdi" />
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert-danger">
+                <a href="#" class="close" data-dissmiss="alert" aria-label="close">&times;</a>
+                <strong>Greska!</strong> @Model.Message
+            </div>
+        </div>
+    </div>
+}
+

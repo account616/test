@@ -1,0 +1,79 @@
+﻿@model PL.Models.PageViewModels.BookSinglePageViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Zanr detalji</h2>
+<hr />
+
+@if (Model.Success)
+{
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.BookViewModel.Title)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.BookViewModel.Title)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.BookViewModel.BookId)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.BookViewModel.BookId)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.BookViewModel.ISBN)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.BookViewModel.ISBN)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.BookViewModel.Description)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.BookViewModel.Description)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.BookViewModel.Genre.Genre)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.BookViewModel.Genre.Genre)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.BookViewModel.Language.Language)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.BookViewModel.Language.Language)
+            </dd>
+            @{
+                foreach (var a in Model.BookViewModel.Authors)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => model.BookViewModel.Authors.Where(x => x.AuthorId == a.AuthorId).First().Name)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.BookViewModel.Authors.Where(x => x.AuthorId == a.AuthorId).First().Name)
+                    </dd>
+                }
+            }
+        </dl>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert-danger">
+                <a href="#" class="close" data-dissmiss="alert" aria-label="close">&times;</a>
+                <strong>Greska!</strong> @Model.Message
+            </div>
+        </div>
+    </div>
+}
+
